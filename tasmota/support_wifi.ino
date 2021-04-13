@@ -42,6 +42,12 @@ const uint8_t WIFI_RETRY_OFFSET_SEC = 12;  // seconds
 #include <AddrList.h>                      // IPv6 DualStack
 #endif  // LWIP_IPV6=1
 
+#ifdef FIRMWARE_EXTENDER
+#include <lwip/dns.h>
+#include <dhcpserver.h>
+#include <lwip/napt.h>
+#endif
+
 struct WIFI {
   uint32_t last_event = 0;                 // Last wifi connection event
   uint32_t downtime = 0;                   // Wifi down duration
@@ -106,6 +112,7 @@ void WifiConfig(uint8_t type)
     }
 #ifdef USE_WEBSERVER
     else if (WIFI_MANAGER == Wifi.config_type || WIFI_MANAGER_RESET_ONLY == Wifi.config_type) {
+      AddLog(LOG_LEVEL_INFO, PSTR(D_LOG_WIFI D_WCFG_2_WIFIMANAGER " " D_ACTIVE_FOR_3_MINUTES));
       WifiManagerBegin(WIFI_MANAGER_RESET_ONLY == Wifi.config_type);
     }
 #endif  // USE_WEBSERVER
@@ -396,6 +403,20 @@ void WifiCheckIp(void)
       Settings.wifi_channel = WiFi.channel();
       uint8_t *bssid = WiFi.BSSID();
       memcpy((void*) &Settings.wifi_bssid, (void*) bssid, sizeof(Settings.wifi_bssid));
+
+    #ifdef FIRMWARE_EXTENDER
+      AddLog(LOG_LEVEL_INFO, "XXX, WiFi Extender loop LWIP: %d", LWIP_FEATURES);
+      dhcps_set_dns(0, WiFi.dnsIP(0));
+      dhcps_set_dns(1, WiFi.dnsIP(1));
+
+      WiFi.softAPConfig(EXTENDER_LOCAL_IP, EXTENDER_GATEWAY_IP, EXTENDER_SUBNET);
+
+      AddLog(LOG_LEVEL_INFO, "XXX, WiFi Extender Attempt...");
+      WiFi.softAP(EXTENDER_SSID, EXTENDER_PASSWORD, EXTENDER_CHANNEL);
+
+      AddLog(LOG_LEVEL_INFO, "XXX, WiFi Extender Enabled");
+    #endif
+
     }
     Wifi.status = WL_CONNECTED;
   } else {
