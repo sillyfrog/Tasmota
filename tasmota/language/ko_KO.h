@@ -256,6 +256,7 @@
 #define D_CONFIGURATION "설정 메뉴"
 #define D_INFORMATION "정보"
 #define D_FIRMWARE_UPGRADE "펌웨어 업그레이드"
+#define D_MANAGEMENT "Consoles"
 #define D_CONSOLE "콘솔"
 #define D_CONFIRM_RESTART "재시작"
 
@@ -619,6 +620,7 @@
 #define D_SENSOR_LED_LINK      "LedLink"    // Suffix "i"
 #define D_SENSOR_PWM           "PWM"        // Suffix "1"
 #define D_SENSOR_COUNTER       "Counter"    // Suffix "1"
+#define D_SENSOR_INPUT         "Input"
 #define D_SENSOR_IRRECV        "IRrecv"
 #define D_SENSOR_MHZ_RX        "MHZ Rx"
 #define D_SENSOR_MHZ_TX        "MHZ Tx"

@@ -256,6 +256,7 @@
 #define D_CONFIGURATION "Konfigurasie"
 #define D_INFORMATION "Inligting"
 #define D_FIRMWARE_UPGRADE "Firmware-opgradering"
+#define D_MANAGEMENT "Consoles"
 #define D_CONSOLE "Konsole"
 #define D_CONFIRM_RESTART "Bevestig weer te begin"
 
@@ -619,6 +620,7 @@
 #define D_SENSOR_LED_LINK      "LedLink"    // Suffix "i"
 #define D_SENSOR_PWM           "PWM"        // Suffix "1"
 #define D_SENSOR_COUNTER       "Teller"    // Suffix "1"
+#define D_SENSOR_INPUT         "Input"
 #define D_SENSOR_IRRECV        "IRontvanger"
 #define D_SENSOR_MHZ_RX        "MHZ Rx"
 #define D_SENSOR_MHZ_TX        "MHZ Tx"

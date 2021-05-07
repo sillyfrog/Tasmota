@@ -256,6 +256,7 @@
 #define D_CONFIGURATION "設定"
 #define D_INFORMATION "資訊"
 #define D_FIRMWARE_UPGRADE "韌體升級"
+#define D_MANAGEMENT "Consoles"
 #define D_CONSOLE "控制台"
 #define D_CONFIRM_RESTART "確認重新啟動"
 
@@ -619,6 +620,7 @@
 #define D_SENSOR_LED_LINK      "LedLink"    // Suffix "i"
 #define D_SENSOR_PWM           "PWM"        // Suffix "1"
 #define D_SENSOR_COUNTER       "Counter"    // Suffix "1"
+#define D_SENSOR_INPUT         "Input"
 #define D_SENSOR_IRRECV        "IRrecv"
 #define D_SENSOR_MHZ_RX        "MHZ Rx"
 #define D_SENSOR_MHZ_TX        "MHZ Tx"

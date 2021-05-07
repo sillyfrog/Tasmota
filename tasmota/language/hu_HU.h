@@ -256,6 +256,7 @@
 #define D_CONFIGURATION "Beállítások"
 #define D_INFORMATION "Információ"
 #define D_FIRMWARE_UPGRADE "Firmware frissítés"
+#define D_MANAGEMENT "Consoles"
 #define D_CONSOLE "Konzol"
 #define D_CONFIRM_RESTART "Biztosan újraindítsam a modult?"
 
@@ -619,6 +620,7 @@
 #define D_SENSOR_LED_LINK      "LedLink"    // Suffix "i"
 #define D_SENSOR_PWM           "PWM"        // Suffix "1"
 #define D_SENSOR_COUNTER       "Számláló"   // Suffix "1"
+#define D_SENSOR_INPUT         "Input"
 #define D_SENSOR_IRRECV        "IR vevő"
 #define D_SENSOR_MHZ_RX        "MHZ Rx"
 #define D_SENSOR_MHZ_TX        "MHZ Tx"
