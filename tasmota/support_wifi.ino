@@ -42,6 +42,17 @@ const uint8_t WIFI_RETRY_OFFSET_SEC = 12;  // seconds
 #include <AddrList.h>                      // IPv6 DualStack
 #endif  // LWIP_IPV6=1
 
+#ifdef USE_RANGE_EXTENDER
+#if !LWIP_FEATURES
+#error LWIP_FEATURES not enabled. Use the -D PIO_FRAMEWORK_ARDUINO_LWIP2_HIGHER_BANDWIDTH build_flags
+#endif
+#ifdef USE_RANGE_EXTENDER_NAPT
+#include <lwip/napt.h>
+#endif // USE_RANGE_EXTENDER_NAPT
+#include <lwip/dns.h>
+#include <dhcpserver.h>
+#endif // USE_RANGE_EXTENDER
+
 struct WIFI {
   uint32_t last_event = 0;                 // Last wifi connection event
   uint32_t downtime = 0;                   // Wifi down duration
@@ -394,6 +405,34 @@ void WifiCheckIp(void)
       Settings->wifi_channel = WiFi.channel();
       uint8_t *bssid = WiFi.BSSID();
       memcpy((void*) &Settings->wifi_bssid, (void*) bssid, sizeof(Settings->wifi_bssid));
+#ifdef USE_RANGE_EXTENDER
+      dhcps_set_dns(0, WiFi.dnsIP(0));
+      dhcps_set_dns(1, WiFi.dnsIP(1));
+      WiFi.softAPConfig(EXTENDER_LOCAL_IP, EXTENDER_GATEWAY_IP, EXTENDER_SUBNET);
+      WiFi.softAP(EXTENDER_SSID, EXTENDER_PASSWORD);
+      AddLog(LOG_LEVEL_INFO, "XXX, WiFi Extender Enabled");
+
+#ifdef USE_RANGE_EXTENDER_NAPT
+      if (EXTENDER_NAPT_ENABLE) {
+        // Memory usage at 512: Heap from 30136 to 17632: 12504
+        // Memory usage at 128: Heap from 30136 to 26848: 3288
+        #define NAPT 128 // IP_NAPT_MAX: 512
+        #define NAPT_PORT 10 //  IP_PORTMAP_MAX: 32
+        err_t ret = ip_napt_init(NAPT, NAPT_PORT);
+        AddLog(LOG_LEVEL_DEBUG, "XXX ip_napt_init(%d,%d): ret=%d (OK=%d)", NAPT, NAPT_PORT, (int)ret, (int)ERR_OK);
+        if (ret == ERR_OK) {
+          ret = ip_napt_enable_no(SOFTAP_IF, 1);
+          if (ret == ERR_OK) {
+            AddLog(LOG_LEVEL_INFO, "XXX Extended WiFi Network '%s'", EXTENDER_SSID);
+          }
+        }
+        if (ret != ERR_OK) {
+          AddLog(LOG_LEVEL_ERROR, "XXX NAPT initialization failed\n");
+        }
+      }
+#endif // USE_RANGE_EXTENDER_NAPT
+
+#endif // USE_RANGE_EXTENDER
     }
     Wifi.status = WL_CONNECTED;
   } else {
