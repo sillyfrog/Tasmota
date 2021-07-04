@@ -43,9 +43,27 @@ const uint8_t WIFI_RETRY_OFFSET_SEC = 12;  // seconds
 #endif  // LWIP_IPV6=1
 
 #ifdef USE_RANGE_EXTENDER
+// Raise compile errors if required #defines are missing
+/* Example Range Extender Configurations
 #if !LWIP_FEATURES
 #error LWIP_FEATURES not enabled. Use the -D PIO_FRAMEWORK_ARDUINO_LWIP2_HIGHER_BANDWIDTH build_flags
 #endif
+#if !EXTENDER_SSID
+#error EXTENDER_SSID not defined. For example, in user_config_override.h add: #define "rangeextender"
+#endif
+#if !EXTENDER_PASSWORD
+#warning EXTENDER_PASSWORD not defined. For example, in user_config_override.h add: #define EXTENDER_PASSWORD "securepassword"
+#endif
+#if !EXTENDER_LOCAL_IP
+#error EXTENDER_LOCAL_IP not defined. For example, in user_config_override.h add: #define EXTENDER_LOCAL_IP IPAddress(10, 99, 1, 1)
+#endif
+#if !EXTENDER_GATEWAY_IP
+#error EXTENDER_GATEWAY_IP not defined. For example, in user_config_override.h add: #define EXTENDER_GATEWAY_IP EXTENDER_LOCAL_IP
+#endif
+#if !EXTENDER_SUBNET
+#error EXTENDER_SUBNET not defined. For example, in user_config_override.h add: #define EXTENDER_SUBNET IPAddress(255, 255, 255, 0)
+#endif
+*/
 #ifdef USE_RANGE_EXTENDER_NAPT
 #include <lwip/napt.h>
 #endif // USE_RANGE_EXTENDER_NAPT
