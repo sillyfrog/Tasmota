@@ -230,6 +230,7 @@ be_define_const_str(type, "type", 1361572173u, 0, 4, NULL);
 be_define_const_str(_request_from, "_request_from", 3965148604u, 0, 13, NULL);
 be_define_const_str(__lower__, "__lower__", 123855590u, 0, 9, &be_const_str_detect);
 be_define_const_str(detect, "detect", 8884370u, 0, 6, NULL);
+be_define_const_str(AudioGeneratorWAV, "AudioGeneratorWAV", 2746509368u, 0, 17, NULL);
 be_define_const_str(HPMA_TX, "HPMA_TX", 173233104u, 0, 7, &be_const_str_input);
 be_define_const_str(input, "input", 4191711099u, 0, 5, &be_const_str_issubclass);
 be_define_const_str(issubclass, "issubclass", 4078395519u, 0, 10, NULL);
@@ -312,8 +313,7 @@ be_define_const_str(lv_switch, "lv_switch", 3407171508u, 0, 9, &be_const_str_num
 be_define_const_str(number, "number", 467038368u, 0, 6, &be_const_str_read_bytes);
 be_define_const_str(read_bytes, "read_bytes", 3576733173u, 0, 10, NULL);
 be_define_const_str(dot_p, ".p", 1171526419u, 0, 2, NULL);
-be_define_const_str(bus, "bus", 1607822841u, 0, 3, &be_const_str_close);
-be_define_const_str(close, "close", 667630371u, 0, 5, &be_const_str_lv_group_focus_cb);
+be_define_const_str(bus, "bus", 1607822841u, 0, 3, &be_const_str_lv_group_focus_cb);
 be_define_const_str(lv_group_focus_cb, "lv_group_focus_cb", 4288873836u, 0, 17, NULL);
 be_define_const_str(SDS0X1_TX, "SDS0X1_TX", 165045983u, 0, 9, NULL);
 be_define_const_str(SDM72_TX, "SDM72_TX", 2042143269u, 0, 8, NULL);
@@ -765,7 +765,7 @@ static const bstring* const m_string_table[] = {
     (const bstring *)&be_const_str___lower__,
     NULL,
     NULL,
-    NULL,
+    (const bstring *)&be_const_str_AudioGeneratorWAV,
     (const bstring *)&be_const_str_HPMA_TX,
     (const bstring *)&be_const_str_SYMBOL_PLAY,
     NULL,
