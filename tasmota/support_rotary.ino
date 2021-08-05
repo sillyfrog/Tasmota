@@ -47,7 +47,9 @@
 #endif
 
 const uint8_t rotary_offset = 128;
+#ifdef ESP8266
 const int8_t rotary_state_pos[16] = { 0, 1, -1, 2, -1, 0, -2, 1, 1, -2, 0, -1, 2, -1, 1, 0 };
+#endif  // ESP8266
 
 struct ROTARY {
   uint8_t no_pullup_mask_a = 0;                // Rotary A pull-up bitmask flags
@@ -111,6 +113,13 @@ void IRAM_ATTR RotaryIsrArgMiDesk(void *arg) {
   uint32_t state = encoder->state & 3;
   if (digitalRead(encoder->pina)) { state |= 4; }
   if (digitalRead(encoder->pinb)) { state |= 8; }
+
+#ifdef ESP32
+//  This fails intermittendly with panic (Cache disabled but cached memory region accessed) if not in DRAM
+//  https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/memory-types.html
+  const static DRAM_ATTR int8_t rotary_state_pos[16] = { 0, 1, -1, 2, -1, 0, -2, 1, 1, -2, 0, -1, 2, -1, 1, 0 };
+#endif  // ESP32
+
   encoder->position += rotary_state_pos[state];
   encoder->state = (state >> 2);
 }
@@ -150,6 +159,11 @@ void RotaryInit(void) {
     Rotary.model = 0;
   }
 #endif  // ESP8266
+#ifdef ESP32
+  if (ValidTemplate("Mi Desk Pro")) {
+    Rotary.model = 0;
+  }
+#endif  // ESP32
 
   RotaryInitMaxSteps();
 
