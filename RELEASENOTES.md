@@ -40,7 +40,7 @@ For initial configuration this release supports Webserver based **WifiManager** 
 
 ## Initial installation
 
-Easy initial installation of Tasmota can be performed using the [Tasmota WebInstaller](https://arendst.github.io/Tasmota/).
+Easy initial installation of Tasmota can be performed using the [Tasmota WebInstaller](https://arendst.github.io/Tasmota-firmware/).
 
 ## Provided Binary Downloads
 
@@ -60,7 +60,7 @@ The following binary downloads have been compiled with ESP8266/Arduino library c
 Above binaries are also available as gzipped version allowing faster uploads.
 
 Latest released binaries can be downloaded from
-- https://github.com/arendst/Tasmota/tree/release-firmware
+- https://github.com/arendst/Tasmota-firmware/tree/main/release-firmware
 - http://ota.tasmota.com/tasmota/release
 
 Historical binaries can be downloaded from
@@ -84,7 +84,7 @@ The following binary downloads have been compiled with ESP32/Arduino library cor
 - **tasmota32-core2.bin** = The Core2 version is specifically tailored to M5Stack Core2 hardware for 8M+ flash.
 
 Latest released binaries can be downloaded from
-- https://github.com/arendst/Tasmota/tree/release-firmware
+- https://github.com/arendst/Tasmota-firmware/tree/main/release-firmware
 - http://ota.tasmota.com/tasmota32/release
 
 Historical binaries can be downloaded from
@@ -100,7 +100,7 @@ The latter links can be used for OTA upgrades too like ``OtaUrl http://ota.tasmo
 
 ## Changelog v9.5.0.5
 ### Added
-- Release of [Tasmota WebInstaller](https://arendst.github.io/Tasmota/)
+- Release of [Tasmota WebInstaller](https://arendst.github.io/Tasmota-firmware/)
 - Command ``SetOption127 1`` to force Wi-Fi in no-sleep mode even if ``Sleep 0`` is not enabled
 - Command ``SetSensor1..127 0|1`` to globally disable individual sensor driver
 - Neopool commands ``NPPHRes``, ``NPCLRes`` and ``NPIonRes`` [#12813](https://github.com/arendst/Tasmota/issues/12813)
@@ -129,6 +129,8 @@ The latter links can be used for OTA upgrades too like ``OtaUrl http://ota.tasmo
 - Extended supported sensor driver range to 128
 - Disable PSRAM on unsupported hardware
 - ESP32 remove GPIO initialization to INPUT from not used GPIOs to allow JTAG support
+- Relax NTP poll if no ntpserver can be resolved by DNS
+- Move firmware binaries to https://github.com/arendst/Tasmota-firmware/tree/main/release-firmware
 - Make Sonoff L1 MusicSync persistent [#12008](https://github.com/arendst/Tasmota/issues/12008)
 - Simplified configuration for ir-full and removal of tasmota-ircustom [#12428](https://github.com/arendst/Tasmota/issues/12428)
 - Refactor platformio [#12442](https://github.com/arendst/Tasmota/issues/12442)
